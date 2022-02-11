@@ -2,6 +2,7 @@ import Express from 'express';
 import bodyParser from 'body-parser';
 import rTracer from 'cls-rtracer';
 import { config, logging } from './config';
+import { router } from './routes';
 
 const NAMESPACE = 'SERVER';
 const app = Express();
@@ -20,12 +21,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World'
-  });
-});
+app.use(router);
 
 /** Error handling */
 app.use((req, res, next) => {
