@@ -14,7 +14,9 @@ export class User {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({
+    unique: true
+  })
   email!: string;
 
   @Column()
@@ -34,5 +36,5 @@ export class User {
     type: 'int',
     default: 0
   })
-  isVerified!: string;
+  isVerified!: number;
 }

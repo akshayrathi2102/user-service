@@ -3,6 +3,9 @@ import bcrypt from 'bcrypt';
 
 import { User } from '../entity';
 import { getConnection } from 'typeorm';
+import { logging } from '../config';
+
+const NAMESPACE = 'controllers/registerUser';
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
@@ -19,9 +22,15 @@ export const registerUser = async (req: Request, res: Response) => {
     }
 
     const savedUser = await getConnection().manager.save(user);
-    res.status(200).json(savedUser);
+    logging.info(NAMESPACE, 'User registered', { user: savedUser });
+    res.status(200).json({
+      status: 200,
+      savedUser
+    });
   } catch (error) {
+    logging.error(NAMESPACE, 'Error registering user', { error });
     res.status(500).json({
+      status: 500,
       message: error.message
     });
   }

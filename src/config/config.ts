@@ -27,7 +27,16 @@ const DATABASE = {
   port: DB_PORT
 };
 
+// JWT
+
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'secret';
+
+const AUTHENTICATION = {
+  accessTokenSecret: ACCESS_TOKEN_SECRET
+};
+
 export const config = {
   server: SERVER,
-  database: DATABASE
+  database: DATABASE,
+  auth: AUTHENTICATION
 };

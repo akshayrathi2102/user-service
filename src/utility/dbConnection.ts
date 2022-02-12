@@ -8,7 +8,7 @@ export const connection = createConnection({
   username: config.database.user,
   password: config.database.password,
   database: config.database.database,
-  synchronize: false,
+  synchronize: true,
   logging: true,
   entities: ['src/entity/*.ts'],
   migrations: ['src/migration/*.ts'],
